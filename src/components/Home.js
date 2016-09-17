@@ -11,7 +11,7 @@ class Home extends React.Component {
             <div>
                 Some state changes:
                 {number}
-                <button onClick={() => increase(1)}>Increase111</button>
+                <button onClick={() => increase(1)}>Increase</button>
                 <button onClick={() => decrease(1)}>Decrease</button>
             </div>
 
