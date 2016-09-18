@@ -11,7 +11,7 @@ export function getTodos() {
 }
 
 export function searchTodos( pattern ) {
-    return db.todos.find({"todo": {'$regex': pattern}});
+    return db.todos.find({"todo": {'$regex' : pattern, '$options' : 'i'}});
 }
 
 export function createTodo(todo) {

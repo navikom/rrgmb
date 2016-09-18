@@ -1,18 +1,39 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {increase, decrease} from '../redux/actions'
+import actions from '../redux/actions';
 
-class Home extends React.Component {
+@connect((state) => state)
+export default class Home extends React.Component {
+    static fetchData(store) {
+        let todos = actions.getTodos();
+        return store.dispatch(todos);
+    }
+
+    getCompleted( todos ){
+
+        let completed = 0;
+
+        todos.map( todo => {
+            if(todo.completed){
+                completed++;
+            }
+        });
+
+        return completed
+    }
 
     render(){
-        const { number, increase, decrease } = this.props;
+
+        const { result } = this.props.todos;
+
+        const completed = this.getCompleted(result);
+
         return(
             <div>
-                Some state changes:
-                {number}
-                <button onClick={() => increase(1)}>Increase111</button>
-                <button onClick={() => decrease(1)}>Decrease</button>
+                You have all records: {result.length}
+                <br/>
+                Completed: {completed}
             </div>
 
         )
@@ -20,9 +41,3 @@ class Home extends React.Component {
 
 
 }
-
-
-export default connect(
-    state => ({ number : state.update.number }),
-    {increase, decrease }
-)( Home )

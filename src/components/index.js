@@ -1,13 +1,15 @@
-import App from './App'
 import Home from './Home'
 import Foo from './Foo'
 import Bar from './Bar'
-import AllTodos from './AllTodos'
+import TodoForm from './TodoForm'
+import Todo from './Todo'
+import SearchTodos from './SearchTodos'
 
 module .exports = {
-    App,
     Home,
     Foo,
     Bar,
-    AllTodos,
+    Todo,
+    TodoForm,
+    SearchTodos,
 }
