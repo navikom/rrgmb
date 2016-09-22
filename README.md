@@ -4,6 +4,8 @@ React React-router Redux Graphql Mongodb Bootstrap initialisation
 ## Loacal instalation
 1. Install [Node.js](https://nodejs.org)
 2. Install [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-os-x/#install-mongodb-community-edition-with-homebrew)
+
+####terminal
 ```
 3. mongod
 ```
@@ -19,4 +21,4 @@ React React-router Redux Graphql Mongodb Bootstrap initialisation
 ```
 7. npm start
 ```
-8. Open browser and go to: localhost:3000
+Open browser and go to: localhost:3000
