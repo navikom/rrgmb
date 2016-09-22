@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import actions from '../redux/actions';
+import { Grid, Badge } from 'react-bootstrap';
 
 @connect((state) => state)
 export default class Home extends React.Component {
@@ -30,11 +31,11 @@ export default class Home extends React.Component {
         const completed = this.getCompleted(result);
 
         return(
-            <div>
-                You have all records: {result.length}
-                <br/>
-                Completed: {completed}
-            </div>
+            <Grid>
+                <h3 className="text-center">Todo Home</h3>
+                <p className="text-center">You have all records: <Badge bsClass="badge warning">{result.length}</Badge></p>
+                <p className="text-center">Completed: <Badge bsClass="badge success">{completed}</Badge></p>
+            </Grid>
 
         )
     }

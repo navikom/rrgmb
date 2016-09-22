@@ -1,0 +1,14 @@
+.completed label{
+    text-decoration : line-through;
+    text-decoration-color: #1b1b1b;
+    text-decoration-style: double;
+    color: #cdcdcd;
+}
+
+.warning{
+    background-color: #f0ad4e;
+}
+
+.success{
+    background-color: #5cb85c;
+}

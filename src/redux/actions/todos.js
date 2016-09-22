@@ -182,7 +182,7 @@ function createTodo(variables) {
 
 function updateTodo(variables) {
     let query = `
-	mutation updateTodoMutation($_id: String!, $todo: String, $completed: Boolean) {
+	mutation updateTodoMutation($_id: String!, $todo: String!, $completed: Boolean) {
 	  updateTodo(_id: $_id, todo: $todo, completed: $completed) {
 		_id
 		todo

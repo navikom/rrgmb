@@ -95,7 +95,7 @@ const mutationType = new GraphQLObjectType({
             type: todoType,
             args: {
                 _id: { type: new GraphQLNonNull(GraphQLString) },
-                todo: { type: GraphQLString },
+                todo: { type: new GraphQLNonNull(GraphQLString) },
                 completed: { type: GraphQLBoolean },
             },
             resolve: (_, { _id, todo, completed }) =>

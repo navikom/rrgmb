@@ -40,7 +40,11 @@ export function updateTodo(_id, todo, completed) {
         reject(`"_id" required to update Todo Item\n`);
     });
 
-    if (!todo) delete todoItem.todo;
+    if (!todo) {
+        return new Promise((resolve, reject) => {
+            reject(`"todo" cannot be empty`);
+        });
+    }
     if (typeof completed !== 'boolean') delete todoItem.completed;
 
     return db.todos.findAndModify({

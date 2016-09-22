@@ -4,50 +4,60 @@
  */
 import React from 'react';
 import { withRouter } from 'react-router';
+import { Row, Col, Checkbox, ButtonGroup, Button, Label } from 'react-bootstrap';
 
 
 @withRouter
 export default class Todo extends React.Component {
-    toggleCompletion() {
-        let { _id } = this.props.todo;
+    toggleCompletion () {
+        let { _id, todo } = this.props.todo;
         let { dispatch, actions } = this.props;
 
-        dispatch(actions.updateTodo({
+        dispatch( actions.updateTodo( {
             _id,
-            completed: this.input.checked
-        }));
+            todo,
+            completed : this.input.checked
+        } ) );
     }
 
-    removeTodo() {
+    removeTodo () {
         let { _id } = this.props.todo;
         let { dispatch, actions } = this.props;
 
-        dispatch(actions.removeTodo({ _id }));
+        dispatch( actions.removeTodo( { _id } ) );
     }
 
-    editTodo() {
+    editTodo () {
         let path = `/todo/edit/${this.props.todo._id}`;
         this.props.router.push( path );
     }
 
-    render() {
+    render () {
         let { todo, completed } = this.props.todo;
-        let style = {
-            textDecoration: completed ? 'line-through' : null
-        };
+        let done = 'checkbox' + ( completed ? ' completed' : '');
 
         return (
-            <div>
-                <label style={style} >
-                    <input type="checkbox"
-                           onChange={::this.toggleCompletion}
-                           ref={(input) => { this.input = input; }}
-                           checked={completed}/>
-                    {todo}
-                </label>
-                <button onClick={::this.removeTodo} style={{marginRight: 12.5}}>Remove</button>
-                <button onClick={::this.editTodo}>Edit</button>
-            </div>
+            <Row>
+                <Col md={8}>
+                    <Checkbox
+                        bsClass={done}
+                        onChange={::this.toggleCompletion}
+                        inputRef={(input) => { this.input = input; }}
+                        checked={completed}
+                    >
+                        {todo}
+                    </Checkbox>
+
+                </Col>
+                <Col md={4}>
+                    <ButtonGroup>
+                        <Button onClick={::this.removeTodo}>Remove</Button>
+                        <Button onClick={::this.editTodo}>Edit</Button>
+                    </ButtonGroup>
+                </Col>
+
+            </Row>
+
         );
     }
 }

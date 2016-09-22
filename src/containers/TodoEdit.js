@@ -1,13 +1,10 @@
-/**
- * Created by Andrei Nadchuk on 18.09.16.
- * email: navikom11@mail.ru
- */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import actions from '../redux/actions';
+import { Grid, Form, FormGroup, FormControl, Col, Button, ControlLabel, Checkbox, Alert } from 'react-bootstrap';
 
 
 @withRouter
@@ -26,8 +23,11 @@ class EditTodoForm extends React.Component {
             _id,
             todo,
             completed
-        })).then(() => {
-            this.props.router.push('/todos');
+        })).then( () => {
+
+            if(todo.length > 0){
+                this.props.router.push('/todos');
+            }
         });
     }
 
@@ -38,22 +38,53 @@ class EditTodoForm extends React.Component {
     }
 
     render() {
-        let { todo, completed } = this.props.todo;
+        let { todo:{todo, completed}, error } = this.props;
+
+
+        let errors = error ?
+            (
+                <Alert bsStyle="danger">
+                    {error.map(({ message }, i) => {
+                        return <div key={i} className="text-center">{message}</div>
+                    })}
+                </Alert>
+            ) : null;
 
         return (
-            <div>
-                <form onSubmit={::this.editTodo}>
-                    <h6>Todo text</h6>
-                    <input type='text' placeholder='A todo item...' defaultValue={todo} ref={(input) => this.input = input}/>
-                    <br/>
-                    <label>
-                        <input type="checkbox" defaultChecked={completed} ref={(checkbox) => { this.checkbox = checkbox; }}/>
-                        -Mark as Completed
-                    </label>
-                    <br/>
-                    <button type='submit'>Update Todo</button>
-                </form>
-            </div>
+                <Form onSubmit={::this.editTodo}>
+
+                    {errors}
+                    <FormGroup controlId="formHorizontal">
+                        <Col componentClass={ControlLabel} sm={2}>
+                            Todo text
+                        </Col>
+                        <Col sm={10}>
+                            <FormControl
+                                type="text"
+                                placeholder='A todo item...'
+                                ref={(input) => { this.input = input; }}
+                                defaultValue={todo}
+                            />
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col smOffset={2} sm={10}>
+                            <Checkbox type="checkbox" defaultChecked={completed} inputRef={(checkbox) => { this.checkbox = checkbox; }}>
+
+                                -Mark as Completed
+                                </Checkbox>
+                        </Col>
+                    </FormGroup>
+
+                    <FormGroup>
+                        <Col smOffset={2} sm={10}>
+                            <Button type="submit">
+                                Update Todo
+                            </Button>
+                        </Col>
+                    </FormGroup>
+                </Form>
         );
     }
 }
@@ -69,13 +100,13 @@ export default class EditTodo extends React.Component {
 
     render() {
         let { todos, dispatch } = this.props;
-        let { result } = todos;
-
+        let { result, error } = todos;
         return (
-            <div>
-                <h1>Editing Todo Item:</h1>
-                <EditTodoForm todo={result} dispatch={dispatch} />
-            </div>
+            <Grid>
+                <h3 className="text-center">Editing Todo Item</h3>
+                <br/>
+                <EditTodoForm todo={result} error={error} dispatch={dispatch} />
+            </Grid>
         );
     }
 }
