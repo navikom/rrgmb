@@ -7,18 +7,18 @@ React React-router Redux Graphql Mongodb Bootstrap initialisation
 
 ####terminal
 ```
-3. mongod
+ mongod
 ```
 ```
-4. git clone https://github.com/navikom/rrgmb.git
+$ git clone https://github.com/navikom/rrgmb.git
 ```
 ```
-5. cd rrgmb
+$ cd rrgmb
 ```
 ```
-6. npm install
+$ npm install
 ```
 ```
-7. npm start
+$ npm start
 ```
 Open browser and go to: localhost:3000
